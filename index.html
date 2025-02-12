@@ -155,10 +155,8 @@
         function loadImages() {
             const collage = document.getElementById('photoCollage');
             // Replace these with your actual image paths
-            // Get the base URL for images that works both locally and on GitHub Pages
-            const baseURL = window.location.pathname.includes('/valentines') 
-                ? '/valentines/images/' 
-                : '/images/';
+            // Get the base URL for images
+            const baseURL = './images/';
             
             const imagePaths = Array.from({length: 12}, (_, i) => 
                 `${baseURL}photo${i + 1}.jpg`
