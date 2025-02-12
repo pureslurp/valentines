@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Valentine's Question</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .photo-collage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            opacity: 0.3;
+        }
+
+        .photo-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #ff4b6e;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #yesBtn {
+            background-color: #ff4b6e;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #cccccc;
+            color: #666666;
+        }
+
+        .heart-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .heart {
+            color: #ff4b6e;
+            font-size: 15rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .back-btn {
+            margin-top: 2rem;
+            background-color: #ff4b6e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="photo-collage" id="photoCollage">
+        <!-- Photos will be added here dynamically -->
+    </div>
+
+    <div class="container">
+        <h1>Will you be my Valentine? 💝</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div class="heart-container" id="heartContainer">
+        <div class="heart">❤️</div>
+        <button class="back-btn" onclick="hideHeart()">Back</button>
+    </div>
+
+    <script>
+        // Function to load images
+        function loadImages() {
+            const collage = document.getElementById('photoCollage');
+            // Replace these with your actual image paths
+            const imagePaths = [
+                'images/photo1.jpg',
+                'images/photo2.jpg',
+                'images/photo3.jpg',
+                'images/photo4.jpg',
+                'images/photo5.jpg',
+                'images/photo6.jpg',
+                'images/photo7.jpg',
+                'images/photo8.jpg',
+                'images/photo9.jpg',
+                'images/photo10.jpg',
+                'images/photo11.jpg',
+                'images/photo12.jpg'
+            ];
+
+            imagePaths.forEach(path => {
+                const img = document.createElement('img');
+                img.src = path;
+                img.alt = 'Memories';
+                collage.appendChild(img);
+            });
+        }
+
+        // Load images when page loads
+        window.onload = loadImages;
+
+        // Handle No button
+        document.getElementById('noBtn').addEventListener('click', function() {
+            alert('Wrong answer! Try again 😉');
+        });
+
+        // Handle Yes button
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('heartContainer').style.display = 'flex';
+        });
+
+        // Function to hide heart and return to main screen
+        function hideHeart() {
+            document.getElementById('heartContainer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
