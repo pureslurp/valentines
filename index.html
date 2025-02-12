@@ -151,6 +151,14 @@
     </div>
 
     <script>
+        // Immediate logging when script loads
+        console.log('Script starting...');
+        console.log('Window location:', {
+            href: window.location.href,
+            pathname: window.location.pathname,
+            origin: window.location.origin
+        });
+
         // Function to load images with debug logging
         function loadImages() {
             const collage = document.getElementById('photoCollage');
@@ -160,10 +168,19 @@
             console.log('Current URL:', window.location.href);
             console.log('Document location:', document.location.href);
             
-            const baseURL = './images/';
-            console.log('Base URL for images:', baseURL);
+            // Try to determine the correct base path
+            const repoPath = '/valentines';
+            const baseURL = window.location.pathname.includes(repoPath) 
+                ? `${repoPath}/images/`
+                : './images/';
             
-            const imagePaths = Array.from({length: 12}, (_, i) => `${baseURL}photo${i + 1}.jpg`);
+            console.log('Calculated base URL:', baseURL);
+            
+            const imagePaths = Array.from({length: 12}, (_, i) => {
+                const path = `${baseURL}photo${i + 1}.jpg`;
+                console.log(`Generated path ${i + 1}:`, path);
+                return path;
+            });
             console.log('Attempting to load images from paths:', imagePaths);
 
             imagePaths.forEach((path, index) => {
