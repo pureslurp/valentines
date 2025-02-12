@@ -168,12 +168,13 @@
             console.log('Current URL:', window.location.href);
             console.log('Document location:', document.location.href);
             
-            // Try to determine the correct base path
-            const repoPath = '/valentines';
-            const baseURL = window.location.pathname.includes(repoPath) 
-                ? `${repoPath}/images/`
+            // Get the correct base URL for GitHub Pages
+            const isGitHubPages = window.location.hostname.includes('github.io');
+            const baseURL = isGitHubPages
+                ? 'https://pureslurp.github.io/valentines/images/'
                 : './images/';
             
+            console.log('Is GitHub Pages:', isGitHubPages);
             console.log('Calculated base URL:', baseURL);
             
             const imagePaths = Array.from({length: 12}, (_, i) => {
