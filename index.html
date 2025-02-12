@@ -151,21 +151,30 @@
     </div>
 
     <script>
-        // Function to load images
+        // Function to load images with debug logging
         function loadImages() {
             const collage = document.getElementById('photoCollage');
-            // Replace these with your actual image paths
-            // Get the base URL for images
-            const baseURL = './images/';
             
-            const imagePaths = Array.from({length: 12}, (_, i) => 
-                `${baseURL}photo${i + 1}.jpg`
-            );
+            // Debug logging
+            console.log('Current pathname:', window.location.pathname);
+            console.log('Current URL:', window.location.href);
+            console.log('Document location:', document.location.href);
+            
+            const baseURL = './images/';
+            console.log('Base URL for images:', baseURL);
+            
+            const imagePaths = Array.from({length: 12}, (_, i) => `${baseURL}photo${i + 1}.jpg`);
+            console.log('Attempting to load images from paths:', imagePaths);
 
-            imagePaths.forEach(path => {
+            imagePaths.forEach((path, index) => {
                 const img = document.createElement('img');
                 img.src = path;
                 img.alt = 'Memories';
+                
+                // Log success/failure for each image
+                img.onload = () => console.log(`Image ${index + 1} loaded successfully:`, path);
+                img.onerror = (e) => console.log(`Image ${index + 1} failed to load:`, path, e);
+                
                 collage.appendChild(img);
             });
         }
